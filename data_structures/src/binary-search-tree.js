@@ -30,6 +30,25 @@ class BinarySearchTree {
 
   breadthFirstForEach(cb) {
     /* Your code here */
+    let queue = [];
+    let storageArray = [];
+
+    queue.push({ value: this.value, left: this.left, right: this.right });
+
+    while (queue.length !== 0) {
+      for (let i = 0; i < queue.length; i++) {
+        let node = queue.shift();
+        storageArray[i] = cb(node.value);
+
+        if (node.left) {
+          queue.push(node.left);
+        }
+        if (node.right) {
+          queue.push(node.right);
+        }
+      }
+    }
+    return storageArray;
   }
 
   insert(value) {
