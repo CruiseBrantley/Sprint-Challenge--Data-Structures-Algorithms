@@ -7,12 +7,29 @@ class BinarySearchTree {
 
   depthFirstForEach(cb) {
     /* Your code here */
-    
+    let stack = [];
+    let storageArray = [];
+
+    stack.push({ value: this.value, left: this.left, right: this.right });
+
+    while (stack.length !== 0) {
+      for (let i = 0; i < stack.length; i++) {
+        let node = stack.pop();
+        storageArray[i] = cb(node.value);
+
+        if (node.right) {
+          stack.push(node.right);
+        }
+        if (node.left) {
+          stack.push(node.left);
+        }
+      }
+    }
+    return storageArray;
   }
 
   breadthFirstForEach(cb) {
     /* Your code here */
-
   }
 
   insert(value) {
